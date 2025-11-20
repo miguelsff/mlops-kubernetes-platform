@@ -1,0 +1,93 @@
+# nfs-ganesha.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: nfs-server-storage
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-ganesha-data
+  namespace: nfs-server-storage
+spec:
+  accessModes: [ ReadWriteOnce ]
+  resources:
+    requests:
+      storage: 100Gi
+  storageClassName: standard
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nfs-ganesha
+  namespace: nfs-server-storage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nfs-ganesha
+  template:
+    metadata:
+      labels:
+        app: nfs-ganesha
+    spec:
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
+      initContainers:
+        - name: prepare-dirs
+          image: busybox:latest
+          command: ["sh","-lc"]
+          args:
+            - |
+              set -e
+              # Export roots
+              mkdir -p /export/bitnami/hubdb/data
+              mkdir -p /export/bitnami/jenkins/home
+              mkdir -p /export/bitnami/minio/data
+              mkdir -p /export/bitnami/postgresql-jupyterhub/data
+              mkdir -p /export/bitnami/postgresql/data
+              mkdir -p /export/bitnami/userdata/data
+              mkdir -p /export/bitnami/jupyterhub/data
+              chmod -R 0777 /export
+          volumeMounts:
+            - name: data
+              mountPath: /export
+      containers:
+        - name: ganesha
+          image: hectorm/nfs-ganesha:latest
+          securityContext:
+            privileged: true
+          ports:
+            - name: nfs
+              containerPort: 2049
+              protocol: TCP
+            - name: nfs-udp
+              containerPort: 2049
+              protocol: UDP
+          volumeMounts:
+            - name: data
+              mountPath: /export
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: nfs-ganesha-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nfs-ganesha
+  namespace: nfs-server-storage
+spec:
+  type: ClusterIP
+  selector:
+    app: nfs-ganesha
+  ports:
+    - name: nfs
+      port: 2049
+      targetPort: 2049
+      protocol: TCP
+    - name: nfs-udp
+      port: 2049
+      targetPort: 2049
+      protocol: UDP

@@ -1,0 +1,193 @@
+{
+  "doc_type": "pipeline",
+  "version": "3.0",
+  "json_schema": "http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json",
+  "id": "elyra-auto-generated-pipeline",
+  "primary_pipeline": "primary",
+  "pipelines": [
+    {
+      "id": "primary",
+      "nodes": [
+        {
+          "id": "1ef4bb28-feea-4b19-87a2-cacc6195d395",
+          "type": "execution_node",
+          "op": "execute-notebook-node",
+          "app_data": {
+            "component_parameters": {
+              "dependencies": [],
+              "include_subdirectories": false,
+              "outputs": [],
+              "env_vars": [],
+              "kubernetes_pod_annotations": [],
+              "kubernetes_pod_labels": [],
+              "kubernetes_secrets": [],
+              "kubernetes_shared_mem_size": {},
+              "kubernetes_tolerations": [],
+              "mounted_volumes": [],
+              "filename": "artifacts/serving.ipynb",
+              "runtime_image": "continuumio/anaconda3@sha256:a2816acd3acda208d92e0bf6c11eb41fda9009ea20f24e123dbf84bb4bd4c4b8"
+            },
+            "label": "serving",
+            "ui_data": {
+              "label": "serving",
+              "image": "/static/elyra/notebook.svg",
+              "x_pos": 198,
+              "y_pos": 306,
+              "description": "Run notebook file"
+            }
+          },
+          "inputs": [
+            {
+              "id": "inPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Input Port"
+                }
+              }
+            }
+          ],
+          "outputs": [
+            {
+              "id": "outPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Output Port"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "32be6672-da93-40eb-bb02-28eb71867aaa",
+          "type": "execution_node",
+          "op": "execute-notebook-node",
+          "app_data": {
+            "component_parameters": {
+              "dependencies": [],
+              "include_subdirectories": false,
+              "outputs": [],
+              "env_vars": [],
+              "kubernetes_pod_annotations": [],
+              "kubernetes_pod_labels": [],
+              "kubernetes_secrets": [],
+              "kubernetes_shared_mem_size": {},
+              "kubernetes_tolerations": [],
+              "mounted_volumes": [],
+              "filename": "artifacts/client.ipynb",
+              "runtime_image": "continuumio/anaconda3@sha256:a2816acd3acda208d92e0bf6c11eb41fda9009ea20f24e123dbf84bb4bd4c4b8"
+            },
+            "label": "cliente",
+            "ui_data": {
+              "label": "cliente",
+              "image": "/static/elyra/notebook.svg",
+              "x_pos": 667,
+              "y_pos": 310,
+              "description": "Run notebook file"
+            }
+          },
+          "inputs": [
+            {
+              "id": "inPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Input Port"
+                }
+              },
+              "links": [
+                {
+                  "id": "f9332190-b9d5-4b95-8f36-2f539a82140e",
+                  "node_id_ref": "1ef4bb28-feea-4b19-87a2-cacc6195d395",
+                  "port_id_ref": "outPort"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "id": "outPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Output Port"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "app_data": {
+        "ui_data": {
+          "comments": [
+            {
+              "id": "f551bfef-efd4-4712-9304-871fc96dd6a3",
+              "x_pos": 374.9999694824219,
+              "y_pos": 97.00000762939453,
+              "width": 205,
+              "height": 54,
+              "content": "**Pipeline de Inferencia Online**",
+              "associated_id_refs": []
+            },
+            {
+              "id": "85d44e04-5eae-48dd-8fe1-cce5901272e0",
+              "x_pos": 172,
+              "y_pos": 213.00000762939453,
+              "width": 197,
+              "height": 49,
+              "content": "Se encarga de crear el API para el modelo",
+              "associated_id_refs": []
+            },
+            {
+              "id": "0a9b14b6-9f4a-4aff-985d-3052f26a9240",
+              "x_pos": 605.0000305175781,
+              "y_pos": 215.00000762939453,
+              "width": 273,
+              "height": 45,
+              "content": "Realiza peticiones al API del modelo para probarlo",
+              "associated_id_refs": []
+            },
+            {
+              "id": "b6d5e447-42f8-40ea-9219-ecea5191cccb",
+              "x_pos": 71.00003051757812,
+              "y_pos": 50,
+              "width": 175,
+              "height": 84,
+              "content": "**Nota: este pipeline funciona con la version \"server\" o \"full\" de smartdeploy**",
+              "associated_id_refs": []
+            }
+          ]
+        },
+        "version": 8,
+        "properties": {
+          "name": "inferencia-online",
+          "runtime": "Generic",
+          "pipeline_defaults": {
+            "kubernetes_pod_annotations": [],
+            "kubernetes_pod_labels": [],
+            "kubernetes_tolerations": [],
+            "kubernetes_shared_mem_size": {},
+            "mounted_volumes": [],
+            "env_vars": [],
+            "kubernetes_secrets": []
+          }
+        }
+      },
+      "runtime_ref": ""
+    }
+  ],
+  "schemas": []
+}

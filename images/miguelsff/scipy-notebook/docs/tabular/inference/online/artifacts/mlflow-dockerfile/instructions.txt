@@ -1,0 +1,12 @@
+# Para crear la imagen Docker ejecutar el siguiente comando:
+docker build -t extratree_20 .
+
+# Para iniciar la imagen Docker como API del modelo, ejecutar:
+docker run -it -p 5002:8080 extratree_20
+
+# Para probar el API del modelo creado, ejecutar:
+curl -X POST -H "Content-Type:application/json" -d @input.json http://localhost:5002/invocations > api_predictions.txt && printf '\n' >> api_predictions.txt
+
+# Las predicciones en api_predictions.txt deben coincidir con el archivo predictions.txt
+# Opcionalmente puedes ejecutar el siguiente comando para ver si hay diferencias.
+diff -w api_predictions.txt predictions.txt

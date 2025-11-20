@@ -1,0 +1,1 @@
+elyra-metadata create runtime-images --name "smartdeploy" --display_name "Smartdeploy" --description "Smartdeploy image" --image_name "gusseppe/smartdeploy:full"

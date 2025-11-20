@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: userdata-pv
+  namespace: default
+  labels:
+    name: userdata-pv
+spec:
+  storageClassName: ${storageClassName}
+  accessModes:
+  - ReadWriteMany
+  capacity:
+    storage: ${volumeSize}
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: ${nfsServer}
+    path: ${userdataPath}
