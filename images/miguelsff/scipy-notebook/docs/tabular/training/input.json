@@ -1,0 +1,22 @@
+{
+    "dataframe_records": [
+        {
+            "specimen_number": 1,
+            "eccentricity": 0.86224,
+            "aspect_ratio": 2.0735,
+            "elongation": 0.52269,
+            "solidity": 0.98686,
+            "stochastic_convexity": 0.99474,
+            "isoperimetric_factor": 0.70529,
+            "maximal_indentation_depth": 0.010097,
+            "lobedness": 0.018554,
+            "average_intensity": 0.041404,
+            "average_contrast": 0.12163,
+            "smoothness": 0.014579,
+            "third_moment": 0.0048689,
+            "uniformity": 0.00027608,
+            "entropy": 0.9458
+        }
+    ]
+}
+

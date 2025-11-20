@@ -1,0 +1,27 @@
+artifact_path: extratree
+flavors:
+  python_function:
+    env: conda.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.8.13
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.1.2
+mlflow_version: 1.30.0
+model_uuid: a30b65d2bc834a179d9dc665bc741d94
+run_id: 300d9fa71c64473abd5e1089220c7e34
+signature:
+  inputs: '[{"name": "eccentricity", "type": "double"}, {"name": "aspect_ratio", "type":
+    "double"}, {"name": "elongation", "type": "double"}, {"name": "solidity", "type":
+    "double"}, {"name": "stochastic_convexity", "type": "double"}, {"name": "isoperimetric_factor",
+    "type": "double"}, {"name": "maximal_indentation_depth", "type": "double"}, {"name":
+    "lobedness", "type": "double"}, {"name": "average_intensity", "type": "double"},
+    {"name": "average_contrast", "type": "double"}, {"name": "smoothness", "type":
+    "double"}, {"name": "third_moment", "type": "double"}, {"name": "uniformity",
+    "type": "double"}, {"name": "entropy", "type": "double"}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "int64", "shape": [-1]}}]'
+utc_time_created: '2023-07-31 19:50:28.330819'

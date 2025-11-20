@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: redis-client-test
+  namespace: default
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: redis-client-test
+          image: bitnami/redis:latest
+          securityContext:
+            privileged: true
+          command:
+            - sh
+            - -c
+            - |
+              echo "[INFO] Testing ..."
+              redis-cli -h redis-server-master.redis-storage.svc.cluster.local -p 6379 -a 1234567890 PING
+              echo "[INFO] Test completed."

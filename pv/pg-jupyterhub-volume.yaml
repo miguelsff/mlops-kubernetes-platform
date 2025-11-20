@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgres-jupyterhub-pv
+  namespace: default
+  labels:
+    name: postgres-jupyterhub-pv
+spec:
+  storageClassName: ${storageClassName}
+  accessModes:
+  - ReadWriteMany
+  capacity:
+    storage: ${volumeSize}
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: ${nfsServer}
+    path: ${postgresqlJupyterhubDataPath}
