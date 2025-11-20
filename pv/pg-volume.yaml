@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgres-pv
+  namespace: default
+  labels:
+    name: postgres-pv
+spec:
+  storageClassName: ${storageClassName}
+  accessModes:
+  - ReadWriteMany
+  capacity:
+    storage: ${volumeSize}
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: ${nfsServer}
+    path: ${postgresqlDataPath}

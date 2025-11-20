@@ -1,0 +1,270 @@
+{
+  "doc_type": "pipeline",
+  "version": "3.0",
+  "json_schema": "http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json",
+  "id": "elyra-auto-generated-pipeline",
+  "primary_pipeline": "primary",
+  "pipelines": [
+    {
+      "id": "primary",
+      "nodes": [
+        {
+          "id": "d9a534da-9b7c-4c94-a7bf-958a9a3d21ef",
+          "type": "execution_node",
+          "op": "execute-notebook-node",
+          "app_data": {
+            "component_parameters": {
+              "dependencies": [],
+              "include_subdirectories": false,
+              "outputs": [],
+              "env_vars": [],
+              "kubernetes_pod_annotations": [],
+              "kubernetes_pod_labels": [],
+              "kubernetes_secrets": [],
+              "kubernetes_shared_mem_size": {},
+              "kubernetes_tolerations": [],
+              "mounted_volumes": [],
+              "filename": "artifacts/preprocessing.ipynb"
+            },
+            "label": "preprocessing",
+            "ui_data": {
+              "label": "preprocessing",
+              "image": "/static/elyra/notebook.svg",
+              "x_pos": 535,
+              "y_pos": 303.5,
+              "description": "Run notebook file"
+            }
+          },
+          "inputs": [
+            {
+              "id": "inPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Input Port"
+                }
+              },
+              "links": [
+                {
+                  "id": "1b937617-0ae7-4a6f-8384-84ef87814f74",
+                  "node_id_ref": "1d2519c6-5719-4e1b-b4ce-9be65e1bf592",
+                  "port_id_ref": "outPort"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "id": "outPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Output Port"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "1d2519c6-5719-4e1b-b4ce-9be65e1bf592",
+          "type": "execution_node",
+          "op": "execute-notebook-node",
+          "app_data": {
+            "component_parameters": {
+              "dependencies": [],
+              "include_subdirectories": false,
+              "outputs": [],
+              "env_vars": [],
+              "kubernetes_pod_annotations": [],
+              "kubernetes_pod_labels": [],
+              "kubernetes_secrets": [],
+              "kubernetes_shared_mem_size": {},
+              "kubernetes_tolerations": [],
+              "mounted_volumes": [],
+              "filename": "artifacts/load_data.ipynb"
+            },
+            "label": "load_dataset",
+            "ui_data": {
+              "label": "load_dataset",
+              "image": "/static/elyra/notebook.svg",
+              "x_pos": 274,
+              "y_pos": 267.5,
+              "description": "Run notebook file"
+            }
+          },
+          "inputs": [
+            {
+              "id": "inPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Input Port"
+                }
+              }
+            }
+          ],
+          "outputs": [
+            {
+              "id": "outPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Output Port"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "07049eb6-619b-4c11-b3e4-32973ebf966f",
+          "type": "execution_node",
+          "op": "execute-notebook-node",
+          "app_data": {
+            "component_parameters": {
+              "dependencies": [],
+              "include_subdirectories": false,
+              "outputs": [],
+              "env_vars": [],
+              "kubernetes_pod_annotations": [],
+              "kubernetes_pod_labels": [],
+              "kubernetes_secrets": [],
+              "kubernetes_shared_mem_size": {},
+              "kubernetes_tolerations": [],
+              "mounted_volumes": [],
+              "filename": "artifacts/training.ipynb"
+            },
+            "label": "training",
+            "ui_data": {
+              "label": "training",
+              "image": "/static/elyra/notebook.svg",
+              "x_pos": 797,
+              "y_pos": 253,
+              "description": "Run notebook file"
+            }
+          },
+          "inputs": [
+            {
+              "id": "inPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Input Port"
+                }
+              },
+              "links": [
+                {
+                  "id": "254d2224-b90a-43e3-9457-04f8019392b8",
+                  "node_id_ref": "d9a534da-9b7c-4c94-a7bf-958a9a3d21ef",
+                  "port_id_ref": "outPort"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "id": "outPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Output Port"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "app_data": {
+        "ui_data": {
+          "comments": [
+            {
+              "id": "670f6ea8-9b52-4bf3-8a6c-70d7922dbe91",
+              "x_pos": 289,
+              "y_pos": 152,
+              "width": 175,
+              "height": 60,
+              "content": "Cargar data de entrenamiento y darle formato",
+              "associated_id_refs": [
+                {
+                  "id": "3e417960-7e2c-48c5-9170-113d9945a407",
+                  "node_ref": "1d2519c6-5719-4e1b-b4ce-9be65e1bf592"
+                }
+              ]
+            },
+            {
+              "id": "5475b55d-7ca6-4aba-8c90-8226b75d51d4",
+              "x_pos": 532,
+              "y_pos": 159,
+              "width": 175,
+              "height": 45,
+              "content": "Limpieza y creación de variables/features",
+              "associated_id_refs": [
+                {
+                  "id": "bef44647-4afb-49b3-8e92-a501067efe1a",
+                  "node_ref": "d9a534da-9b7c-4c94-a7bf-958a9a3d21ef"
+                }
+              ]
+            },
+            {
+              "id": "5ff543f5-0de3-4439-b8e4-bf10774a0f48",
+              "x_pos": 387,
+              "y_pos": 44,
+              "width": 171,
+              "height": 45,
+              "content": "Pipeline de entrenamiento",
+              "associated_id_refs": []
+            },
+            {
+              "id": "d0659629-268d-4c21-aa4c-91d1314c3751",
+              "x_pos": 779,
+              "y_pos": 152,
+              "width": 175,
+              "height": 42,
+              "content": "Creación del modelo",
+              "associated_id_refs": [
+                {
+                  "id": "7c0cb9b9-4bde-4e74-852b-8b95e5920991",
+                  "node_ref": "07049eb6-619b-4c11-b3e4-32973ebf966f"
+                }
+              ]
+            }
+          ]
+        },
+        "version": 8,
+        "properties": {
+          "pipeline_defaults": {
+            "kubernetes_shared_mem_size": {},
+            "kubernetes_tolerations": [],
+            "kubernetes_pod_labels": [],
+            "kubernetes_pod_annotations": [],
+            "mounted_volumes": [],
+            "env_vars": [],
+            "kubernetes_secrets": [],
+            "runtime_image": "tensorflow/tensorflow:2.8.0"
+          },
+          "name": "training",
+          "runtime": "Generic"
+        }
+      },
+      "runtime_ref": ""
+    }
+  ],
+  "schemas": []
+}

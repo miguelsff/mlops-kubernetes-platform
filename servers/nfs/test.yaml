@@ -1,0 +1,30 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: nfs-test
+  namespace: default
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: nfs-test
+          image: busybox:latest
+          securityContext:
+            privileged: true
+          command:
+            - sh
+            - -c
+            - |
+              echo "[INFO] Testing NFS port..."
+              nc -vz nfs-ganesha.nfs-server-storage.svc.cluster.local 2049 || exit 1
+              echo "[INFO] Checking NFS kernel support..."
+              cat /proc/filesystems | grep -E "nfs|nfs4" || echo "NFS not supported"
+              echo "[INFO] Creating mount point /mnt..."
+              mkdir -p /mnt
+              echo "[INFO] Mounting export /bitnami..."
+              mount -t nfs -o vers=4.1,timeo=600,retrans=2 nfs-ganesha.nfs-server-storage.svc.cluster.local:/bitnami /mnt
+              echo "[OK] Mount successful. Directory contents:"
+              ls -l /mnt
+              umount /mnt
+              echo "[INFO] Unmounted successfully."
